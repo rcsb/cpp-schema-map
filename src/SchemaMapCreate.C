@@ -8,8 +8,6 @@
 #include "GenCont.h"
 #include "CifFile.h"
 #include "DicFile.h"
-#include "DICParserBase.h"
-#include "CifParserBase.h"
 #include "CifFileUtil.h"
 
 #include "SchemaMap.h"
@@ -1024,20 +1022,7 @@ void SchemaMap::GetTablesAndColumns(vector<string>& tableList,
     {
         // Get the name of items from the specified file and not from the
         // dictionary
-        CifFile* fobjIn = new CifFile(_verbose);
-
-        CifParser* cifParserR = new CifParser(fobjIn, fobjIn->GetVerbose());
-
-        string diags;
-        cifParserR->Parse(inFile, diags);
-
-        delete(cifParserR);
-
-        if (!diags.empty())
-        {
-            cout << "Diags for file " << inFile << "  = " << diags << endl;
-            diags.clear();
-        }
+        CifFile* fobjIn = ParseCif(inFile, _verbose);
 
         vector<string> blockNames;
         fobjIn->GetBlockNames(blockNames);
