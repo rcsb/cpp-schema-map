@@ -11,13 +11,13 @@
 #include <limits>
 
 #include "CifParserBase.h"
+#include "CifFileUtil.h"
 #include "SchemaMap.h"
 
-// using std::string::size_type;
+
 using std::numeric_limits;
 using std::cout;
 using std::endl;
-
 
 
 static void _set_attribute_value_where(ISTable* t,  const string& category,
@@ -27,10 +27,10 @@ static void _set_attribute_value_where(ISTable* t,  const string& category,
 
 const long _MAXFILESIZE = std::numeric_limits<std::streamsize>::max();
 
+
 SchemaMap::SchemaMap(const string& schemaFile,
   const string& schemaFileOdb, bool verbose)
 {
-
   Clear();
 
   // Schema file is required.
@@ -48,13 +48,26 @@ SchemaMap::SchemaMap(const string& schemaFile,
 
   if (_schemaFileOdb.empty())
   {
-      _fobjS = new CifFile(_verbose, Char::eCASE_SENSITIVE,
+      _fobjS = ParseCif(_schemaFile, _verbose, Char::eCASE_SENSITIVE,
         _MAX_LINE_LENGTH);
   }
   else if (!_schemaFile.empty())
   {
       _fobjS = new CifFile(CREATE_MODE, _schemaFileOdb, _verbose,
         Char::eCASE_SENSITIVE, _MAX_LINE_LENGTH);
+
+      _fobjS->SetSrcFileName(_schemaFile);
+
+      CifParser cifParser(_fobjS, _verbose);
+
+      cifParser.Parse(_schemaFile, _fobjS->_parsingDiags);
+
+      if (!(_fobjS->_parsingDiags).empty())
+      {
+          cout << _fobjS->_parsingDiags;
+          throw NotFoundException("Possibly file not found \"" + _schemaFile +
+            "\"", "SchemaMap::SchemaMap");
+      }
   }
   else
   {
@@ -62,33 +75,7 @@ SchemaMap::SchemaMap(const string& schemaFile,
         Char::eCASE_SENSITIVE, _MAX_LINE_LENGTH);
   }
 
-  if (!_schemaFile.empty())
-  {
-      CifParser* cifParserR = new CifParser(_fobjS, _fobjS->GetVerbose());
-
-      string diags;
-      cifParserR->Parse(_schemaFile, diags);
-
-      if (!diags.empty())
-      {
-          cout << diags;
-          throw NotFoundException("Possibly file not found \"" + _schemaFile +
-            "\"", "SchemaMap::SchemaMap");
-      }
-
-      delete(cifParserR);
-
-      if (!diags.empty())
-      {
-#ifdef VLAD_LOG_SEPARATION
-        if (_verbose) _log << " Diagnostics [" << diags.size() << "] " << diags.c_str() << endl;
-#endif
-        diags.clear();
-      }
-  } 
-
   _AssignAttribIndices();
-
 }
 
 
