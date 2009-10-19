@@ -62,9 +62,11 @@ SchemaMap::SchemaMap(const string& schemaFile,
 
       cifParser.Parse(_schemaFile, _fobjS->_parsingDiags);
 
-      if (!(_fobjS->_parsingDiags).empty())
+      const string& parsingDiags = _fobjS->GetParsingDiags();
+
+      if (!parsingDiags.empty())
       {
-          cout << _fobjS->_parsingDiags;
+          cout << parsingDiags;
           throw NotFoundException("Possibly file not found \"" + _schemaFile +
             "\"", "SchemaMap::SchemaMap");
       }
