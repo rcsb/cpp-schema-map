@@ -1024,6 +1024,14 @@ void SchemaMap::GetTablesAndColumns(vector<string>& tableList,
         // dictionary
         CifFile* fobjIn = ParseCif(inFile, _verbose);
 
+        const string& parsingDiags = fobjIn->GetParsingDiags();
+
+        if (!parsingDiags.empty())
+        {
+            cout << "Diags for file " << fobjIn->GetSrcFileName() <<
+              "  = " << parsingDiags << endl;
+        }
+
         vector<string> blockNames;
         fobjIn->GetBlockNames(blockNames);
         unsigned int nBlocks = blockNames.size();

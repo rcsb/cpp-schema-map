@@ -50,6 +50,14 @@ SchemaMap::SchemaMap(const string& schemaFile,
   {
       _fobjS = ParseCif(_schemaFile, _verbose, Char::eCASE_SENSITIVE,
         _MAX_LINE_LENGTH);
+
+        const string& parsingDiags = _fobjS->GetParsingDiags();
+
+        if (!parsingDiags.empty())
+        {
+            cout << "Diags for file " << _fobjS->GetSrcFileName() <<
+              "  = " << parsingDiags << endl;
+        }
   }
   else if (!_schemaFile.empty())
   {
