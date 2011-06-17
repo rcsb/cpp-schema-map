@@ -979,11 +979,6 @@ void SchemaMap::GetDictTables()
     }
 
     _itemAliasesTab = block.GetTablePtr("item_aliases");
-    if (_itemAliasesTab == NULL)
-    {
-        throw NotFoundException("Dictionary table item_aliases is missing.",
-          "SchemaMap::GetDictTables");
-    }
 
     vector<string> searchCols;
     searchCols.push_back("id");
@@ -1071,6 +1066,17 @@ void SchemaMap::GetTablesAndColumns(vector<string>& tableList,
           " entries." << endl;
     }
 
+    if ((op != "alias") && (op != "unalias"))
+    {
+        return;
+    }
+
+    if (_itemAliasesTab == NULL)
+    {
+        throw NotFoundException("Dictionary table item_aliases is missing.",
+          "SchemaMap::MapAlias");
+    }
+
     if (op == "alias")
     {
         // alias - search name extract alias name
@@ -1081,7 +1087,7 @@ void SchemaMap::GetTablesAndColumns(vector<string>& tableList,
 
         QueryColAlias.push_back("name");
     }
-    else
+    else // (op == "unalias")
     {
         // unalias - search alias name extract name
         CurrAliasName = "name";
