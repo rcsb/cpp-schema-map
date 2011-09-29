@@ -3,6 +3,7 @@
  */
 
 
+#include <string.h>
 #include <iostream>
 #include "CifString.h"
 #include "GenCont.h"
