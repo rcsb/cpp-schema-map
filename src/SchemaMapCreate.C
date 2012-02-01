@@ -27,14 +27,16 @@ static const char* cifTypes[] =
     "code", "ucode", "line", "uline", "text", "int", "float", "name",
     "idname", "any", "yyyy-mm-dd", "uchar3", "uchar1", "symop", "atcode",
     "yyyy-mm-dd:hh:mm", "fax", "phone", "email", "code30", "float-range",
-    "operation_expression", "yyyy-mm-dd:hh:mm-flex", "ec-type", ""
+    "operation_expression", "yyyy-mm-dd:hh:mm-flex", "ec-type",
+    "ucode-alphanum-csv", ""
 };
 
 static const char* sqlTypes[] =
 {
     "char", "char", "char", "char", "char", "int", "float", "char", "char",
     "text", "datetime", "char", "char", "char", "char", "datetime", "char",
-    "char", "char", "char", "char", "char" , "datetime", "char", ""
+    "char", "char", "char", "char", "char" , "datetime", "char", "varchar",
+    ""
 };
 
 static const char* defFieldWidths[] =
