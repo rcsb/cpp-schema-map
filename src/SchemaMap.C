@@ -1129,8 +1129,13 @@ eTypeCode SchemaMap::_ConvertDataType(const string& dataType)
     {
         return(eTYPE_CODE_BIGINT);
     }
+    else if (String::IsCiEqual(dataType, "varchar"))
+    {
+        return(eTYPE_CODE_TEXT);
+    }
     else
     {
+        cout << "Invalid data type: \"" << dataType << "\"" << endl;
         throw out_of_range("Invalid data type in SchemaMap::_ConvertDataType");
     }
 }
