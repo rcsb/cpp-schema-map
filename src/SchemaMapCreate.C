@@ -21,14 +21,22 @@ using std::endl;
 //  This definintion influences the construction of auxillary tables tableinfo
 //  and columinfo used by NDB data management tools, and it controls the
 //  insertion of an implicit key in all tables.
+//
+/*  JDW added default values for V5_next/rc
+"int-range", "point_symmetry", "id_list",  "4x3_matrix", "non_negative_int", "positive_int", "emd_id", "pdb_id", "point_group", "point_group_helical", "boolean", "author", "orcid_id",  "symmetry_operation", ""
+     "char",           "char",    "char",        "char",              "int",          "int",   "char",   "char",        "char",                "char",    "char",   "char",     "char",                "char", ""
+      "25",              "20",      "80",         "100",               "10",           "10",     "10",     "15",          "20",                  "20",       "5",     "80",       "20",                  "80", ""
+       "0",               "0",       "0",           "0",                "0",            "0",      "0",      "0",           "0",                   "0",       "0",      "0",        "0",                   "0", ""
+       "3",                 3",       "5",           "5",                "1",            "1",      "3",      "3",           "3",                   "3",       "3",      "5",        "3",                   "3", ""
+*/
 
 static const char* cifTypes[] =
 {
     "code", "ucode", "line", "uline", "text", "int", "float", "name",
     "idname", "any", "yyyy-mm-dd", "uchar3", "uchar1", "symop", "atcode",
     "yyyy-mm-dd:hh:mm", "fax", "phone", "email", "code30", "float-range",
-    "operation_expression", "yyyy-mm-dd:hh:mm-flex", "ec-type",
-    "ucode-alphanum-csv", ""
+    "operation_expression", "yyyy-mm-dd:hh:mm-flex", "ec-type","ucode-alphanum-csv",
+    "int-range", "point_symmetry", "id_list",  "4x3_matrix", "non_negative_int", "positive_int", "emd_id", "pdb_id", "point_group", "point_group_helical", "boolean", "author", "orcid_id",  "symmetry_operation", ""
 };
 
 static const char* sqlTypes[] =
@@ -36,25 +44,28 @@ static const char* sqlTypes[] =
     "char", "char", "char", "char", "char", "int", "float", "char", "char",
     "text", "datetime", "char", "char", "char", "char", "datetime", "char",
     "char", "char", "char", "char", "char" , "datetime", "char", "varchar",
-    ""
+    "char",        "char",    "char",        "char",              "int",          "int",   "char",   "char",        "char",                "char",    "char",   "char",     "char",                "char", ""
 };
 
 static const char* defFieldWidths[] =
 {
     "10", "10", "80", "80", "200", "10", "10", "80", "80", "255", "15", "4",
-    "2", "10", "6", "20", "25", "25", "80", "30", "30", "30", "20", "10", ""
+    "2", "10", "6", "20", "25", "25", "80", "30", "30", "30", "20", "10",
+   "25",       "20",      "80",         "100",               "10",           "10",     "10",     "15",          "20",                  "20",       "5",     "80",       "20",                  "80", ""
 };
 
 static const char* defFieldPrecisions[] =
 {
     "0", "0", "0", "0", "0", "0", "6", "0", "0", "0", "0", "0", "0", "0",
-    "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", ""
+    "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+    "0",       "0",       "0",           "0",                "0",            "0",      "0",      "0",           "0",                   "0",       "0",      "0",        "0",                   "0", ""
 };
 
 static const char* formatTypes[] =
 {
     "3", "3", "5", "5", "5", "1", "2", "3", "3", "5", "7", "3", "3", "3",
-    "3", "7", "3", "3", "3", "3", "3", "3", "3", "3", ""
+    "3", "7", "3", "3", "3", "3", "3", "3", "3", "3",
+    "3",      "3",       "5",           "5",                "1",            "1",      "3",      "3",           "3",                   "3",       "3",      "5",        "3",                   "3", ""
 };
 
 static string CurrAliasName;
@@ -85,7 +96,7 @@ SchemaMap::SchemaMap(const eFileMode fileMode, const string& dictSdbFileName,
 
 
     _dict = GetDictFile(NULL, string(), dictSdbFileName, _verbose);
- 
+
     GetDictTables();
 
     //  Define/create the tables in the output mapping file...
@@ -108,7 +119,7 @@ void SchemaMap::Create(const string& op, const string& inFile,
         // tableList[it] - contains the current category
 
         if (_verbose)
-            cout << endl << "ADDING TABLE " << tableList[it] << endl;	
+            cout << endl << "ADDING TABLE " << tableList[it] << endl;
 
         vector<string> categoryKeys;
         GetCategoryKeys(categoryKeys, tableList[it]);
@@ -246,7 +257,7 @@ unsigned int nws_strlen(const string& line)
     }
 
     return(len);
-} 
+}
 
 
 unsigned int count_leading_ws(const string& line)
@@ -1178,8 +1189,11 @@ unsigned int SchemaMap::GetTypeCodeIndex(const string& tableName,
     {
         cerr << "++ERROR \"" << typeCode <<  "\" type unknown " << endl;
 
-        throw NotFoundException("Unknown type code: \"" + typeCode + "\"",
-          "SchemaMap::GetTypeCodeIndex");
+        //throw NotFoundException("Unknown type code: \"" + typeCode + "\"",
+        //  "SchemaMap::GetTypeCodeIndex");
+        //
+        cerr << "++WARN \"" << typeCode <<  "\" treated as TEXT type  -- revise code for better handling --" << endl;
+        itype = 4;
     }
 
     return(itype);
@@ -1202,9 +1216,9 @@ void SchemaMap::UpdateMapConditions()
 }
 
 
-#define NDBCOMPAT 1    
+#define NDBCOMPAT 1
 
-bool mungCifName(const string& cifName, string& dbNameOut) 
+bool mungCifName(const string& cifName, string& dbNameOut)
 {
     dbNameOut.clear();
 
@@ -1213,7 +1227,7 @@ bool mungCifName(const string& cifName, string& dbNameOut)
     mDbLen = 60;
     mLen=255;
     memset(dbName,'\0',256);
-    iLen = cifName.size(); 
+    iLen = cifName.size();
     bool iReturn = false;
     if (iLen > mDbLen)
     {
@@ -1240,14 +1254,14 @@ bool mungCifName(const string& cifName, string& dbNameOut)
             }
             else
             {
-	        dbName[j] = cifName[i]; 
+	        dbName[j] = cifName[i];
             }
             j++;
         }
 
         if ((int) strlen(dbName) > mDbLen)
         {
-            //JDW -  heuristic substitutions to cleanup munging in PDB Ex dictionary  - - 
+            //JDW -  heuristic substitutions to cleanup munging in PDB Ex dictionary  - -
             string tS;
             tS = dbName;
             unsigned int il;
@@ -1347,13 +1361,13 @@ bool mungCifName(const string& cifName, string& dbNameOut)
                 il=tS.find("Size");
             if (il < tS.size())
                 tS.replace(tS.find("Size"),4,"Sz");
-                memset(dbName,'\0',256);      
+                memset(dbName,'\0',256);
             for (i=0; i < (int) tS.size(); i++)
             {
 	        dbName[i] = tS.c_str()[i];
             }
             if ((int)tS.size() > mDbLen )
-                cout << "WARNING - " << tS << " exceeds character length of " << mDbLen << endl; 
+                cout << "WARNING - " << tS << " exceeds character length of " << mDbLen << endl;
         }
     }
     else
@@ -1362,40 +1376,40 @@ bool mungCifName(const string& cifName, string& dbNameOut)
         for (i=0; i < iLen; i++)
         {
             if ( cifName[i] == ']')
-            { 
-	        iReturn=true; 
+            {
+	        iReturn=true;
 	        continue;
             }
             if (cifName[i] == '[' || cifName[i] == '-' || cifName[i] == '%' ||
 	      cifName[i] == '/')
             {
-	        dbName[j] = '_'; 
+	        dbName[j] = '_';
 	        j++;
 	        iReturn = true;
 	        continue;
             }
-            dbName[j] = cifName[i]; 
+            dbName[j] = cifName[i];
             j++;
         }
     }
 
-    // Update result... 
+    // Update result...
     iLen = strlen(dbName);
     if (iLen > mDbLen) iLen = mDbLen;
     for (i=0; i < iLen; i++) {
       dbNameOut.push_back(dbName[i]);
     }
 
-    // Some special table handling... 
+    // Some special table handling...
 
     if ((dbNameOut == "database") || (dbNameOut == "cell"))
-    { 
+    {
         dbNameOut += "1";
         iReturn = true;
     }
-    
+
     // --------------------------------------------------------------------------------
-    //   Special tables required for NDB compatability ... 
+    //   Special tables required for NDB compatability ...
 
     if (NDBCOMPAT)
     {
