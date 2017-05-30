@@ -43,7 +43,7 @@ static const char* sqlTypes[] =
 {
     "char", "char", "char", "char", "char", "int", "float", "char", "char",
     "text", "datetime", "char", "char", "char", "char", "datetime", "char",
-    "char", "char", "char", "char", "char" , "datetime", "char", "varchar",
+    "char", "char", "char", "char", "char" , "datetime", "char", "char",
     "char",        "char",    "char",        "char",              "int",          "int",   "char",   "char",        "char",                "char",    "char",   "char",     "char",                "char", ""
 };
 
@@ -997,6 +997,7 @@ void SchemaMap::GetDictTables()
     vector<string> searchCols;
     searchCols.push_back("id");
 
+#ifdef RCSB_TABLEINFO_COLUMNINFO
     vector<unsigned int> matchedRows;
 
     vector<string> target;
@@ -1020,6 +1021,7 @@ void SchemaMap::GetDictTables()
          " is missing. Concatenate \"sql-fragment.dic\" to the dictionary.",
           "SchemaMap::GetDictTables");
     }
+#endif // RCSB_TABLEINFO_COLUMNINFO
 
 }
 
@@ -1402,7 +1404,9 @@ bool mungCifName(const string& cifName, string& dbNameOut)
 
     // Some special table handling...
 
-    if ((dbNameOut == "database") || (dbNameOut == "cell"))
+    if ((dbNameOut == "database") || (dbNameOut == "cell") ||
+      (dbNameOut == "order") || (dbNameOut == "partition") ||
+      (dbNameOut == "group"))
     {
         dbNameOut += "1";
         iReturn = true;
