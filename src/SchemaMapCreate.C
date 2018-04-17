@@ -23,7 +23,7 @@ using std::endl;
 //  insertion of an implicit key in all tables.
 //
 /*  JDW added default values for V5_next/rc
-"int-range", "point_symmetry", "id_list",  "4x3_matrix", "non_negative_int", "positive_int", "emd_id", "pdb_id", "point_group", "point_group_helical", "boolean", "author", "orcid_id",  "symmetry_operation", ""
+"int-range", "point_symmetry", "id_list",  "3x4_matrices", "non_negative_int", "positive_int", "emd_id", "pdb_id", "point_group", "point_group_helical", "boolean", "author", "orcid_id",  "symmetry_operation", ""
      "char",           "char",    "char",        "char",              "int",          "int",   "char",   "char",        "char",                "char",    "char",   "char",     "char",                "char", ""
       "25",              "20",      "80",         "100",               "10",           "10",     "10",     "15",          "20",                  "20",       "5",     "80",       "20",                  "80", ""
        "0",               "0",       "0",           "0",                "0",            "0",      "0",      "0",           "0",                   "0",       "0",      "0",        "0",                   "0", ""
@@ -36,7 +36,7 @@ static const char* cifTypes[] =
     "idname", "any", "yyyy-mm-dd", "uchar3", "uchar1", "symop", "atcode",
     "yyyy-mm-dd:hh:mm", "fax", "phone", "email", "code30", "float-range",
     "operation_expression", "yyyy-mm-dd:hh:mm-flex", "ec-type","ucode-alphanum-csv",
-    "int-range", "point_symmetry", "id_list",  "4x3_matrix", "non_negative_int", "positive_int", "emd_id", "pdb_id", "point_group", "point_group_helical", "boolean", "author", "orcid_id",  "symmetry_operation", ""
+    "int-range", "point_symmetry", "id_list",  "3x4_matrices", "non_negative_int", "positive_int", "emd_id", "pdb_id", "point_group", "point_group_helical", "boolean", "author", "orcid_id",  "symmetry_operation", ""
 };
 
 static const char* sqlTypes[] =
