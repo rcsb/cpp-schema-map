@@ -41,7 +41,7 @@ static const char* cifTypes[] =
 
 static const char* sqlTypes[] =
 {
-    "char", "char", "char", "char", "char", "int", "float", "char", "char",
+    "char", "char", "char", "char", "text", "int", "float", "char", "char",
     "text", "datetime", "char", "char", "char", "char", "datetime", "char",
     "char", "char", "char", "char", "char" , "datetime", "char", "char",
     "char",        "char",    "char",        "char",              "int",          "int",   "char",   "char",        "char",                "char",    "char",   "char",     "char",                "char", ""
