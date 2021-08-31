@@ -1287,100 +1287,100 @@ bool mungCifName(const string& cifName, string& dbNameOut)
             il=tS.find("Constraint");
             if (il < tS.size())
                 tS.replace(tS.find("Constraint"),10,"Cnstr");
-                il=tS.find("Distance");
+            il=tS.find("Distance");
             if (il < tS.size())
                 tS.replace(tS.find("Distance"),8,"Dst");
-                il=tS.find("Total");
+            il=tS.find("Total");
             if (il < tS.size())
 	        tS.replace(tS.find("Total"),5,"Tl");
-                il=tS.find("Correction");
+            il=tS.find("Correction");
             if (il < tS.size())
 	        tS.replace(tS.find("Correction"),10,"Cor");
-                il=tS.find("Location");
+            il=tS.find("Location");
             if (il < tS.size())
 	        tS.replace(tS.find("Location"),8,"Loc");
-                il=tS.find("Count");
+            il=tS.find("Count");
             if (il < tS.size())
                 tS.replace(tS.find("Count"),5,"Ct");
-                il=tS.find("Violation");
+            il=tS.find("Violation");
             if (il < tS.size())
 	        tS.replace(tS.find("Violation"),9,"Viol");
-                il=tS.find("Cutoff");
+            il=tS.find("Cutoff");
             if (il < tS.size())
 	        tS.replace(tS.find("Cutoff"),6,"Ctff");
-                il=tS.find("Residue");
+            il=tS.find("Residue");
             if (il < tS.size())
 	        tS.replace(tS.find("Residue"),7,"Res");
-                il=tS.find("Torsion");
+            il=tS.find("Torsion");
             if (il < tS.size())
                 tS.replace(tS.find("Tor"),8,"Res");
-                il=tS.find("Angle");
+            il=tS.find("Angle");
             if (il < tS.size())
                 tS.replace(tS.find("Angle"),5,"Res");
-                il=tS.find("Stereochemistry");
+            il=tS.find("Stereochemistry");
             if (il < tS.size())
 	        tS.replace(tS.find("Stereochemistry"),15,"Ster");
-                il=tS.find("Stereochem");
+            il=tS.find("Stereochem");
             if (il < tS.size())
 	        tS.replace(tS.find("Stereochem"),10,"Ster");
-                il=tS.find("Average");
+            il=tS.find("Average");
             if (il < tS.size())
                 tS.replace(tS.find("Average"),7,"Avg");
-                il=tS.find("Averaging");
+            il=tS.find("Averaging");
             if (il < tS.size())
 	        tS.replace(tS.find("Averaging"),9,"Avg");
-                il=tS.find("Maximum");
+            il=tS.find("Maximum");
             if (il < tS.size())
 	        tS.replace(tS.find("Maximum"),7,"Max");
-                il=tS.find("Minimum");
+            il=tS.find("Minimum");
             if (il < tS.size())
 	        tS.replace(tS.find("Minimum"),7,"Min");
-                il=tS.find("maximum");
+            il=tS.find("maximum");
             if (il < tS.size())
 	        tS.replace(tS.find("maximum"),7,"max");
-                il=tS.find("minimum");
+            il=tS.find("minimum");
             if (il < tS.size())
                 tS.replace(tS.find("minimum"),7,"min");
-                il=tS.find("Radius");
+            il=tS.find("Radius");
             if (il < tS.size())
                 tS.replace(tS.find("Radius"),6,"Rad");
-                il=tS.find("Gyration");
+            il=tS.find("Gyration");
             if (il < tS.size())
                 tS.replace(tS.find("Gyration"),8,"Gyr");
-                il=tS.find("VanDerWaals");
+            il=tS.find("VanDerWaals");
             if (il < tS.size())
                 tS.replace(tS.find("VanDerWaals"),11,"VDW");
-                il=tS.find("Potential");
+            il=tS.find("Potential");
             if (il < tS.size())
                 tS.replace(tS.find("Potential"),9,"Pot");
-                il=tS.find("CrossSectional");
+            il=tS.find("CrossSectional");
             if (il < tS.size())
 	        tS.replace(tS.find("CrossSectional"),14,"CrSct");
-                il=tS.find("Correlation");
+            il=tS.find("Correlation");
             if (il < tS.size())
 	        tS.replace(tS.find("Correlation"),11,"Cor");
-                il=tS.find("Parameter");
+            il=tS.find("Parameter");
             if (il < tS.size())
 	        tS.replace(tS.find("Parameter"),9,"Parm");
-                il=tS.find("Recombination");
+            il=tS.find("Recombination");
             if (il < tS.size())
 	        tS.replace(tS.find("Recombination"),13,"Recmb");
-                il=tS.find("Timepoint");
+            il=tS.find("Timepoint");
             if (il < tS.size())
 	        tS.replace(tS.find("Timepoint"),9,"Tmpt");
-                il=tS.find("Express");
+            il=tS.find("Express");
             if (il < tS.size())
 	        tS.replace(tS.find("Express"),7,"Expr");
-                il=tS.find("Bonded");
+            il=tS.find("Bonded");
             if (il < tS.size())
                 tS.replace(tS.find("Bonded"),6,"Bnd");
-                il=tS.find("Units");
+            il=tS.find("Units");
             if (il < tS.size())
                 tS.replace(tS.find("Units"),5,"Un");
-                il=tS.find("Size");
+            il=tS.find("Size");
             if (il < tS.size())
                 tS.replace(tS.find("Size"),4,"Sz");
-                memset(dbName,'\0',256);
+            memset(dbName,'\0',256);
             for (i=0; i < (int) tS.size(); i++)
             {
 	        dbName[i] = tS.c_str()[i];

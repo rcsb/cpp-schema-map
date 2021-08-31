@@ -744,7 +744,7 @@ const vector<AttrInfo>& SchemaMap::GetTableAttributeInfo(
 #endif
             nattrib++;
         }
-        catch (NotFoundException)
+        catch (NotFoundException& exc)
         {
             // VLAD - Add some debugging, warning, reporting code
         }
