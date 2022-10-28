@@ -33,7 +33,7 @@ using std::endl;
 static const char* cifTypes[] =
 {
     "code", "ucode", "line", "uline", "text", "int", "float", "name",
-    "idname", "any", "yyyy-mm-dd", "uchar3", "uchar1", "symop", "atcode",
+    "idname", "any", "yyyy-mm-dd", "uchar5", "uchar3", "uchar1", "symop", "atcode",
     "yyyy-mm-dd:hh:mm", "fax", "phone", "email", "code30", "float-range",
     "operation_expression", "yyyy-mm-dd:hh:mm-flex", "ec-type","ucode-alphanum-csv",
     "int-range", "point_symmetry", "id_list",  "3x4_matrices", "non_negative_int", "positive_int",
@@ -44,7 +44,7 @@ static const char* cifTypes[] =
 static const char* sqlTypes[] =
 {
     "char", "char", "char", "char", "text", "int", "float", "char",
-    "char", "text", "datetime", "char", "char", "char", "char",
+    "char", "text", "datetime", "char", "char", "char", "char", "char",
     "datetime", "char", "char", "char", "char", "char",
     "char" , "datetime", "char", "char",
     "char",        "char",    "char",        "char",              "int",          "int",
@@ -55,10 +55,10 @@ static const char* sqlTypes[] =
 static const char* defFieldWidths[] =
 {
     "10", "10", "80", "80", "200", "10", "10", "80",
-    "80", "255", "15", "4", "2", "10", "6",
+    "80", "255", "15", "6", "4", "2", "10", "6",
     "20", "25", "25", "80", "30", "30",
     "30", "20", "10", "25",
-    "20", "80",         "100",               "10",           "10",     "10",
+    "20", "80",  "100", "10", "10", "10",
     "15", "20", "20", "5", "80", "20", "80", "80",
     "80", "80", "200", ""
 };
@@ -69,15 +69,15 @@ static const char* defFieldPrecisions[] =
     "0", "0", "0", "0", "0", "0", "0",
     "0", "0", "0", "0", "0", "0",
     "0", "0", "0", "0",
-    "0",  "0", "0", "0", "0", "0",
-    "0", "0", "0", "0", "0",  "0", "0", "0",
+    "0", "0", "0", "0", "0", "0",
+    "0", "0", "0", "0", "0", "0", "0", "0",
     "0", "0", "0", ""
 };
 
 static const char* formatTypes[] =
 {
     "3", "3", "5", "5", "5", "1", "2", "3",
-    "3", "5", "7", "3", "3", "3", "3",
+    "3", "5", "7", "3", "3", "3", "3", "3",
     "7", "3", "3", "3", "3", "3",
     "3", "3", "3", "3",
     "3", "5", "5", "1", "1", "3",
