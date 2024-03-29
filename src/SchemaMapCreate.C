@@ -38,7 +38,7 @@ static const char* cifTypes[] =
     "operation_expression", "yyyy-mm-dd:hh:mm-flex", "ec-type","ucode-alphanum-csv",
     "int-range", "point_symmetry", "id_list",  "3x4_matrices", "non_negative_int", "positive_int",
     "emd_id", "pdb_id", "point_group", "point_group_helical", "boolean", "author", "orcid_id",  "symmetry_operation",
-    "exp_data_doi", "asym_id", "id_list_spc", "pdb_id_u", ""
+    "exp_data_doi", "asym_id", "id_list_spc", "pdb_id_u", "uniprot_ptm_id", ""
 };
 
 static const char* sqlTypes[] =
@@ -49,7 +49,7 @@ static const char* sqlTypes[] =
     "char" , "datetime", "char", "char",
     "char",        "char",    "char",        "char",              "int",          "int",
     "char",   "char",        "char",                "char",    "char",   "char",     "char",                "char",
-    "char", "char", "char", "char", ""
+    "char", "char", "char", "char", "char", ""
 };
 
 static const char* defFieldWidths[] =
@@ -60,7 +60,7 @@ static const char* defFieldWidths[] =
     "30", "20", "10", "25",
     "20", "80",  "100", "10", "10", "10",
     "15", "20", "20", "5", "80", "20", "80", "80",
-    "80", "80", "200", "20", ""
+    "80", "80", "200", "20", "20", ""
 };
 
 static const char* defFieldPrecisions[] =
@@ -71,7 +71,7 @@ static const char* defFieldPrecisions[] =
     "0", "0", "0", "0",
     "0", "0", "0", "0", "0", "0",
     "0", "0", "0", "0", "0", "0", "0", "0",
-    "0", "0", "0", "0", ""
+    "0", "0", "0", "0", "0", ""
 };
 
 static const char* formatTypes[] =
@@ -82,7 +82,7 @@ static const char* formatTypes[] =
     "3", "3", "3", "3",
     "3", "5", "5", "1", "1", "3",
     "3", "3", "3", "3", "5", "3", "3", "5",
-    "3", "3", "5", "3", ""
+    "3", "3", "5", "3", "5", ""
 };
 
 static string CurrAliasName;
