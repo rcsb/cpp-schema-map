@@ -66,7 +66,7 @@ static const char* defFieldWidths[] =
 static const char* defFieldPrecisions[] =
 {
     "0", "0", "0", "0", "0", "0", "6", "0",
-    "0", "0", "0", "0", "0", "0", "0",
+    "0", "0", "0", "0", "0", "0", "0", "0",
     "0", "0", "0", "0", "0", "0",
     "0", "0", "0", "0",
     "0", "0", "0", "0", "0", "0",
@@ -481,6 +481,7 @@ void SchemaMap::UpdateAttribSchema(const string& tableName,
     newRowT1.push_back(defFieldPrecisions[itype]);
 
     _attribSchema->AddRow(newRowT1);
+    std::cout << "Adding " << tableName << "." <<key << " " <<colName << " " << itype << std::endl;
 
 }
 
